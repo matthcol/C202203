@@ -7,10 +7,18 @@
 
 #include "planteur.h"
 
+// extern double PI;
+
+static int fAux(int x) {
+	return x+1;
+}
+
 int planter() {
-	return 5;
+	return fAux(5);
 }
 
 double threshold(double x) {
-	return sin(x) + 1;
+	// PI+=1.3333E-5;  // interdit si const
+	return sin(x+2*PI) + 1 + fAux(x);
 }
+

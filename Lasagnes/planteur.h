@@ -11,6 +11,8 @@
 // expose dependency
 #include <math.h>
 
+#include "manger.h"
+
 int planter();
 
 double threshold(double x);
