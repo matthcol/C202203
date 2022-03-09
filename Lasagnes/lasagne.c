@@ -18,5 +18,8 @@ int ajouterCouche(int nbCouches) {
 int main(int argc, char **argv) {
 	int nbCouches = 0;
 	nbCouches = ajouterCouche(nbCouches) + planter();
+	if (threshold(3.3)) {
+		nbCouches++;
+	}
 	printf("Lasagnes avec %d couches\n", nbCouches);
 }

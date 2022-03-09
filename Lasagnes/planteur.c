@@ -8,5 +8,9 @@
 #include "planteur.h"
 
 int planter() {
-	return 5 + (int) (sin(3) * 1000);
+	return 5;
+}
+
+double threshold(double x) {
+	return sin(x) + 1;
 }

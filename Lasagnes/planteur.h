@@ -13,4 +13,6 @@
 
 int planter();
 
+double threshold(double x);
+
 #endif /* PLANTEUR_H_ */
