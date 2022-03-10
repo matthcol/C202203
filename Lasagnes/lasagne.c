@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <sys/resource.h>
+// #include <sys/resource.h>
 
 #include "planteur.h"
 #include "manger.h"
@@ -75,9 +75,11 @@ void test_betterave_dynamique() {
 	betterave_s bett2 = {3, 6, &bett1};
 
 	// betteraves in the heap
-	betterave_s* bett3_ptr = (betterave_s*) malloc(sizeof(betterave_s));
+	betterave_s* bett3_ptr = malloc(sizeof(betterave_s));
 	if (bett3_ptr==NULL) {
-		// here handle error and quit
+		// here handle error and quit (or continue without this betterave)
+		perror("Error while allocating betterave\n");
+		exit(-1);
 	}
 	bett3_ptr->nbFeuilles = 4;
 	bett3_ptr->tailleRacine = 6;
@@ -85,7 +87,9 @@ void test_betterave_dynamique() {
 
 	betterave_s* bett4_ptr = NULL;
 	if (creerBetterave(&bett4_ptr, 7, 8, bett3_ptr)==-1){
-		// handle error and quit
+		// handle error and quit (or continue without this betterave)
+		perror("Error while allocating betterave\n");
+		exit(-1);
 	}
 
 	// use betteraves
@@ -95,6 +99,7 @@ void test_betterave_dynamique() {
 
 	// free betterave in the heap
 	free(bett3_ptr);
+	free(bett4_ptr);
 
 	// do something after free
 	bett3_ptr = NULL;
@@ -112,19 +117,18 @@ void test_arrays(){
 	printf("tableau rempli\n");
 }
 
-void tchatWithMemory(){
-	struct rlimit rl;
-	int result;
-	result = getrlimit(RLIMIT_STACK, &rl);
-	printf("Stack size: %d\n", rl.rlim_cur);
-
-}
+//void tchatWithMemory(){
+//	struct rlimit rl;
+//	int result;
+//	result = getrlimit(RLIMIT_STACK, &rl);
+//	printf("Stack size: %d\n", rl.rlim_cur);
+//}
 
 int main(int argc, char **argv) {
 	// day1();
 	test_betterave_dynamique();
 	// test_arrays();
-	tchatWithMemory();
+	// tchatWithMemory();
 }
 
 
