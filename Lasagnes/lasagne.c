@@ -13,6 +13,7 @@
 #include "planteur.h"
 #include "manger.h"
 #include "betterave.h"
+#include "arraytool.h"
 
 // extern double PI;
 
@@ -108,13 +109,35 @@ void test_betterave_dynamique() {
 // DG : taille definie à la compilation
 // uint8_t tableau[40000000];
 
+
+
 void test_arrays(){
 	// Stack : limitée
-	uint8_t tableau[1000000];
+	// uint8_t tableau[1000000];
+	// variable globale à visibilité locale (static)
+	static uint8_t tableau[1000000];
+	printf("First cell: %d / %p\n", tableau[1], tableau);
 	for (int i=0; i<sizeof(tableau); i++) {
 		tableau[i] = (uint8_t) (i%255);
 	}
 	printf("tableau rempli\n");
+}
+
+void test_const_arrays(){
+	const uint8_t * tab;
+	uint8_t const * tab2;
+	uint8_t * const tab3;
+	uint8_t const * const tab4;
+	// unsigned const const int const * const tab5 = NULL;
+	unsigned const int const * const tab5 = NULL; // Warn: duplicate 'const' declaration specifier
+	const unsigned int  * const tab6 = tab5;
+}
+
+void test_array_doubles(size_t sizeBetteraves1) {
+	// const size_t sizeBetteraves1 = 10;
+	double poidsBetteraves1[sizeBetteraves1];
+	double poidsBetteraves2[] = {1.2, 3.4};
+	fillArray(poidsBetteraves1, sizeBetteraves1, 0.33);
 }
 
 //void tchatWithMemory(){
@@ -126,9 +149,12 @@ void test_arrays(){
 
 int main(int argc, char **argv) {
 	// day1();
-	test_betterave_dynamique();
+	// test_betterave_dynamique();
 	// test_arrays();
+//	test_arrays();
+	test_array_doubles(10);
 	// tchatWithMemory();
+
 }
 
 

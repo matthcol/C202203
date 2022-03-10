@@ -9,7 +9,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int creerBetterave(betterave_s** bett_ptr_ptr, uint8_t tailleRacine, int32_t nbFeuilles, betterave_s* next){
+int creerBetterave(
+		betterave_s** bett_ptr_ptr,
+		uint8_t tailleRacine,
+		int32_t nbFeuilles,
+		betterave_s* next)
+{
 	// local pointer
 	betterave_s* bett_ptr = malloc(sizeof(betterave_s));
 	// test si la betterave a eu la place de pousser dans le Heap
