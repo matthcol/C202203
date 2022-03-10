@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "planteur.h"
 #include "manger.h"
@@ -67,8 +68,34 @@ void day1() {
 	// bett2 = (struct aaa) bet;
 }
 
-int main(int argc, char **argv) {
+void test_betterave_dynamique() {
+	// betteraves in the stack
+	betterave_s bett1 = {3, 5, NULL};
+	betterave_s bett2 = {3, 6, &bett1};
 
+	// betteraves in the heap
+	betterave_s* bett3_ptr = (betterave_s*) malloc(sizeof(betterave_s));
+	bett3_ptr->nbFeuilles = 4;
+	bett3_ptr->tailleRacine = 6;
+	bett3_ptr->next = &bett1; // attention danger
+}
+
+// DG : taille definie à la compilation
+// uint8_t tableau[40000000];
+
+void test_arrays(){
+	// Stack : limitée
+	uint8_t tableau[1000000];
+	for (int i=0; i<sizeof(tableau); i++) {
+		tableau[i] = (uint8_t) (i%255);
+	}
+	printf("tableau rempli\n");
+}
+
+int main(int argc, char **argv) {
+	// day1();
+	// test_betterave_dynamique();
+	test_arrays();
 }
 
 
