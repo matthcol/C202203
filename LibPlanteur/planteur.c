@@ -14,3 +14,7 @@ int planter() {
 double threshold(double x) {
 	return sin(x) + 1;
 }
+
+static int fAux(int x) {
+	return x+1;
+}

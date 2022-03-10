@@ -38,4 +38,15 @@ typedef struct _betterave_s {
 	struct _betterave_s* next;
 } betterave_s;
 
+typedef enum _color_e {
+	C_RED=1,
+	C_GREEN=2,
+	C_PEAS=3
+} color_e;
+
+typedef union _choix_u {
+	float x;
+	int y;
+} choix_u;
+
 #endif /* BETTERAVE_H_ */

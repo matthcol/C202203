@@ -8,6 +8,8 @@
 #include <stdio.h>
 
 #include "planteur.h"
+#include "manger.h"
+
 
 int ajouterCouche(int nbCouches);
 

@@ -11,8 +11,8 @@
 // expose dependency
 #include <math.h>
 
-int planter();
+extern int planter();
 
-double threshold(double x);
+extern double threshold(double x);
 
 #endif /* PLANTEUR_H_ */

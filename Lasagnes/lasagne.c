@@ -34,8 +34,10 @@ void flottants() {
 	printf("%.10f %.10f %.10f\n", prix, 2*prix, 3*prix);
 }
 
-int main(int argc, char **argv) {
+void day1() {
 	betterave_s bet = {3, 5, NULL};
+	color_e color = C_GREEN;
+	choix_u choix;
 	int nbCouches = 0;
 	nbCouches = ajouterCouche(nbCouches) + planter();
 	if (threshold(3.3)) {
@@ -48,9 +50,25 @@ int main(int argc, char **argv) {
 	// printf("Invisible one ? %d\n", fAux(3));
 	printf("PI = %f\n", PI);
 	printf("E = %f\n", E);
-	printf("Taille Betterave : %ld, %ld\n",
+	printf("Taille Betterave : %ld, %ld, %ld\n",
 			sizeof(bet),
-			sizeof(betterave_s));
+			sizeof(betterave_s),
+			sizeof(color_e));
+	choix.x = 3.3;
+	printf("Choix : x=%f y=%d\n", choix.x, choix.y);
+	choix.y = 555;
+	printf("Choix : x=%f y=%d\n", choix.x, choix.y);
+
+	struct aaa {
+		uint8_t a;
+		int32_t b;
+		struct _betterave_s* c;
+	} bett2;
+	// bett2 = (struct aaa) bet;
+}
+
+int main(int argc, char **argv) {
+
 }
 
 
