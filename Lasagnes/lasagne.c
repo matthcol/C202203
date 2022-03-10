@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <sys/resource.h>
 
 #include "planteur.h"
 #include "manger.h"
@@ -75,11 +76,22 @@ void test_betterave_dynamique() {
 
 	// betteraves in the heap
 	betterave_s* bett3_ptr = (betterave_s*) malloc(sizeof(betterave_s));
+	if (bett3_ptr==NULL) {
+		// here handle error and quit
+	}
 	bett3_ptr->nbFeuilles = 4;
 	bett3_ptr->tailleRacine = 6;
-	bett3_ptr->next = &bett1; // attention danger
+	bett3_ptr->next = &bett2; // attention danger
+
+	betterave_s* bett4_ptr = NULL;
+	if (creerBetterave(&bett4_ptr, 7, 8, bett3_ptr)==-1){
+		// handle error and quit
+	}
 
 	// use betteraves
+	displayBetterave(bett3_ptr);
+	displayBetterave(bett4_ptr);
+	displayBetteraves(bett4_ptr);
 
 	// free betterave in the heap
 	free(bett3_ptr);
@@ -100,10 +112,19 @@ void test_arrays(){
 	printf("tableau rempli\n");
 }
 
+void tchatWithMemory(){
+	struct rlimit rl;
+	int result;
+	result = getrlimit(RLIMIT_STACK, &rl);
+	printf("Stack size: %d\n", rl.rlim_cur);
+
+}
+
 int main(int argc, char **argv) {
 	// day1();
-	// test_betterave_dynamique();
-	test_arrays();
+	test_betterave_dynamique();
+	// test_arrays();
+	tchatWithMemory();
 }
 
 

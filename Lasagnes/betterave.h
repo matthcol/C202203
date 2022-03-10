@@ -49,4 +49,14 @@ typedef union _choix_u {
 	int y;
 } choix_u;
 
+// functions about betteraves
+
+// creerBetterave + gestion error
+int creerBetterave(betterave_s** bett_ptr_ptr, uint8_t tailleRacine, int32_t nbFeuilles, betterave_s* next);
+
+// displayBetterave
+void displayBetterave(betterave_s* bett);
+void displayBetteraves(betterave_s* bett);
+
+
 #endif /* BETTERAVE_H_ */
