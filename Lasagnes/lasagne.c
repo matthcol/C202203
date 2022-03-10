@@ -78,6 +78,14 @@ void test_betterave_dynamique() {
 	bett3_ptr->nbFeuilles = 4;
 	bett3_ptr->tailleRacine = 6;
 	bett3_ptr->next = &bett1; // attention danger
+
+	// use betteraves
+
+	// free betterave in the heap
+	free(bett3_ptr);
+
+	// do something after free
+	bett3_ptr = NULL;
 }
 
 // DG : taille definie à la compilation
