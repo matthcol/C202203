@@ -5,14 +5,16 @@
  *      Author: Matthias
  */
 #include "macros.h"
+#include <stdio.h>
 
-// simulation autotools, option de compilation
-#define OS linux
+#include "config.h"
 
 // symbole defini par le systeme : ex __linux__
 
 
-#ifdef __linux__
+// #ifdef __linux__
+// #if defined(__linux__)
+#if OS==LINUX
 
 #include <sys/resource.h>
 
