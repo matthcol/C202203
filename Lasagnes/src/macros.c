@@ -18,17 +18,21 @@
 
 #include <sys/resource.h>
 
-void tchatWithMemory(){
-	struct rlimit rl;
-	int result;
-	result = getrlimit(RLIMIT_STACK, &rl);
-	printf("Stack size: %d\n", rl.rlim_cur);
-}
+#define GET_STACK_SIZE(a,b) getrlimit(a, &b)
 
 #else
 
-void tchatWithMemory(){
-	printf("Stack size: UNKNOWN\n");
-}
+struct rlimit {
+	int rlim_cur;
+};
+
+#define GET_STACK_SIZE(a,b) 0
 
 #endif
+
+void tchatWithMemory(){
+	struct rlimit rl;
+	int result;
+	result = GET_STACK_SIZE(RLIMIT_STACK, rl);
+	printf("Stack size: %d\n", rl.rlim_cur);
+}
