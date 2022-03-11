@@ -21,7 +21,8 @@ int main(int argc, char **argv) {
 		// code du fils
 		printf("I'm the child\n");
 		displayInfosProcess("Luke");
-		sleep(20);
+		sleep(5);
+		execlp("ps");
 	} else {
 		// code du parent
 		printf("I'm your father\n");
