@@ -8,12 +8,13 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-// #include <sys/resource.h>
+
 
 #include "planteur.h"
 #include "manger.h"
 #include "betterave.h"
 #include "arraytool.h"
+#include "macros.h"
 
 // extern double PI;
 
@@ -161,13 +162,6 @@ void test_array_doubles(size_t sizeBetteraves1) {
 	free(poidsBetteraves3-1);
 }
 
-//void tchatWithMemory(){
-//	struct rlimit rl;
-//	int result;
-//	result = getrlimit(RLIMIT_STACK, &rl);
-//	printf("Stack size: %d\n", rl.rlim_cur);
-//}
-
 void traiterBetterave(betterave_s* betteraves, size_t n,
 		void (*traitement)(betterave_s*)){
 	printf("@ fun: %p, %p, %p\n", traitement, *traitement, &traitement);
@@ -231,9 +225,9 @@ int main(int argc, char **argv) {
 //	test_arrays();
 //	test_array_doubles(rand() % 1024);
 //	test_array_doubles(rand() % 1024);
-//  tchatWithMemory();
+  tchatWithMemory();
 //	progFunctionalWithBetteraves();
-	progFuncGeneric();
+//	progFuncGeneric();
 }
 
 
