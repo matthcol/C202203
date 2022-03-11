@@ -135,9 +135,30 @@ void test_const_arrays(){
 
 void test_array_doubles(size_t sizeBetteraves1) {
 	// const size_t sizeBetteraves1 = 10;
-	double poidsBetteraves1[sizeBetteraves1];
 	double poidsBetteraves2[] = {1.2, 3.4};
+	double poidsBetteraves1[sizeBetteraves1]; // use alloca (reserver dans stack taille dynamique)
+	double* poidsBetteraves3 = malloc(sizeBetteraves1*sizeof(double));
+
 	fillArray(poidsBetteraves1, sizeBetteraves1, 0.33);
+	fillArray(poidsBetteraves3, sizeBetteraves1, 0.55);
+	printf("Paramètre sizeBetteraves1: %p\n", &sizeBetteraves1);
+	printf("Size poidsBetteraves1: %d, %d, %p\n",
+			sizeBetteraves1, sizeof(poidsBetteraves1), poidsBetteraves1);
+	printf("Size poidsBetteraves2: %d, %d, %p\n",
+			2, sizeof(poidsBetteraves2), poidsBetteraves2);
+
+	poidsBetteraves3[1]++;
+	(*(poidsBetteraves3+2))+=2;
+	printf("Sample: %f %f %f %f %f %f\n",
+				poidsBetteraves3[0], *poidsBetteraves3,
+				poidsBetteraves3[1], *(poidsBetteraves3+1),
+				poidsBetteraves3[2], *(poidsBetteraves3+2));
+	poidsBetteraves3 +=1;
+	printf("Sample: %f %f %f %f %f %f\n",
+			poidsBetteraves3[0], *poidsBetteraves3,
+			poidsBetteraves3[1], *(poidsBetteraves3+1),
+			poidsBetteraves3[2], *(poidsBetteraves3+2));
+	free(poidsBetteraves3-1);
 }
 
 //void tchatWithMemory(){
@@ -147,14 +168,72 @@ void test_array_doubles(size_t sizeBetteraves1) {
 //	printf("Stack size: %d\n", rl.rlim_cur);
 //}
 
+void traiterBetterave(betterave_s* betteraves, size_t n,
+		void (*traitement)(betterave_s*)){
+	printf("@ fun: %p, %p, %p\n", traitement, *traitement, &traitement);
+	for (size_t i=0; i<n; i++) {
+		// traitement(&betteraves[i]);
+//		 traitement(betteraves+i);
+		(*traitement)(betteraves+i);
+	}
+	betterave_s bet1;
+}
+
+void progFunctionalWithBetteraves() {
+	betterave_s betteraves[]={
+			{1,2,NULL},
+			{3,4,NULL}};
+	traiterBetterave(betteraves, 2, displayBetterave);
+	traiterBetterave(betteraves, 2, addOneFeuille);
+	traiterBetterave(betteraves, 2, &displayBetterave);
+	// traiterBetterave(betteraves, 2, addOneFeuille+1); // seg fault
+	traiterBetterave(betteraves, 2, *displayBetterave); // WTF !
+
+	printf("Arithmetique pointeurs de f: %p, %p\n",
+			addOneFeuille, addOneFeuille+1);
+
+	// tableaux de taitements
+	printf("Begin Tableau de traitements\n");
+	void (*traitements[])(betterave_s*)={addOneFeuille, displayBetterave};
+	for (int i=0; i<2; i++) {
+		// traiterBetterave(betteraves, 2, traitements[i]);
+		traiterBetterave(betteraves, 2, *(traitements+i));
+	}
+	printf("End Tableau de traitements\n");
+}
+
+void progFuncGeneric(){
+	void (*traitement)(); // var pour une func à nb qq de parametres et retour void
+	betterave_s bett = {3,4,NULL};
+
+	traitement = addOneFeuille;
+	traitement(&bett);  // pas de controle sur les args
+	traitement(&bett, 3); // extra arg 3 is ignored
+	// traitement();  // seg fault ou random
+
+	traitement = displayBetterave;
+	traitement(&bett, 3);
+
+	traitement = addNFeuille;
+	traitement(&bett, 3);
+
+	printf("AAAAAAAAAAAAAAAAAAa\n");
+	traitement(&bett); // seg fault ou random
+
+	displayBetterave(&bett);
+
+}
+
 int main(int argc, char **argv) {
 	// day1();
 	// test_betterave_dynamique();
 	// test_arrays();
 //	test_arrays();
-	test_array_doubles(10);
-	// tchatWithMemory();
-
+//	test_array_doubles(rand() % 1024);
+//	test_array_doubles(rand() % 1024);
+//  tchatWithMemory();
+//	progFunctionalWithBetteraves();
+	progFuncGeneric();
 }
 
 

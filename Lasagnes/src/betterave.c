@@ -44,3 +44,10 @@ void displayBetteraves(betterave_s* bett) {
 	}
 }
 
+void addOneFeuille(betterave_s* bett){
+	bett->nbFeuilles++;
+}
+
+void addNFeuille(betterave_s* bett, int nFeuilles){
+	bett->nbFeuilles+= nFeuilles;
+}

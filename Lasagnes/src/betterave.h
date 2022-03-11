@@ -58,5 +58,8 @@ int creerBetterave(betterave_s** bett_ptr_ptr, uint8_t tailleRacine, int32_t nbF
 void displayBetterave(betterave_s* bett);
 void displayBetteraves(betterave_s* bett);
 
+void addOneFeuille(betterave_s* bett);
+void addNFeuille(betterave_s* bett, int nFeuilles);
+
 
 #endif /* BETTERAVE_H_ */
