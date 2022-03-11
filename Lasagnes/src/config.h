@@ -11,7 +11,7 @@
 // simulation autotools, option de compilation
 #define LINUX 0
 #define WINDOWS 1
-// #define OS LINUX
+//#define OS LINUX
 #define OS WINDOWS
 
 #endif /* SRC_CONFIG_H_ */

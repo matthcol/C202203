@@ -18,6 +18,9 @@ void displayUserProcess() {
 	 uid_t uid_real = getuid();
 	 uid_t uid_effective = geteuid();
 	 printf("UID: real=%d effective=%d\n", uid_real, uid_effective);
+
+	 // gid_t getgid(void);
+     // gid_t getegid(void);
 }
 
 int main(int argc, char **argv) {
@@ -34,6 +37,7 @@ int main(int argc, char **argv) {
 		printf("I'm your father\n");
 		displayInfosProcess("Darth Vader");
 		displayUserProcess();
+		// if sur real uid
 		sleep(20);
 	}
 	return 0;
