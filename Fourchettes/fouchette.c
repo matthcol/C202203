@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 		printf("I'm the child\n");
 		displayInfosProcess("Luke");
 		sleep(5);
-		execlp("ps");
+		execlp("ps", "ps");
 	} else {
 		// code du parent
 		printf("I'm your father\n");
