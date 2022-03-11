@@ -14,6 +14,12 @@ void displayInfosProcess(const char* identity){
 	printf("Process [%s] pid=%d ppid=%d\n", identity, pid_self, pid_parent);
 }
 
+void displayUserProcess() {
+	 uid_t uid_real = getuid();
+	 uid_t uid_effective = geteuid();
+	 printf("UID: real=%d effective=%d\n", uid_real, uid_effective);
+}
+
 int main(int argc, char **argv) {
 	printf("Common\n");
 	pid_t pid_ret = fork();
@@ -27,6 +33,7 @@ int main(int argc, char **argv) {
 		// code du parent
 		printf("I'm your father\n");
 		displayInfosProcess("Darth Vader");
+		displayUserProcess();
 		sleep(20);
 	}
 	return 0;
